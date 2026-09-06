@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  seal:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      # Both directions: legitimate work passes, forbidden work stays blocked.
+      - name: Seal
+        run: python3 tests/seal.py
+      # And the seal itself is measured. A guard nobody has tried to break is a
+      # guard nobody knows the strength of.
+      - name: Mutants
+        run: python3 tests/mutants.py
