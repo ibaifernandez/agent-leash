@@ -110,6 +110,17 @@ The asymmetry that decides how wide to close it:
 > If the veto is too narrow, somebody gets frustrated and says so. If it is too
 > wide, a worker slips its leash and nobody says anything.
 
+### Where a worker comes from
+
+`LEASH_ROLE=worker` only means something inside a protocol that says who *does*
+merge. That protocol is in **[docs/protocol.md](docs/protocol.md)**: four roles,
+nine board columns each with an owner, three transitions that admit no
+interpretation, and the invariants they exist to protect.
+
+It is prose — the kernel does not read it. It is included because *nobody merges
+their own work* is the one invariant a worker can break silently and alone,
+which is why it is the one enforced here in code and not in a document.
+
 ---
 
 ## Install
